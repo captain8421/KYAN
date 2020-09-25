@@ -3,7 +3,7 @@
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='kyan.conf'
 CONFIGFOLDER='/root/.kyancore'
-COIN_DAEMON='sapd'
+COIN_DAEMON='kyand'
 COIN_CLI='kyan-cli'
 COIN_TX='kyan-tx'
 COIN_PATH='/usr/local/bin/'
@@ -209,7 +209,6 @@ $COIN_PATH$COIN_DAEMON -daemon
    echo -e "${RED}$COIN_NAME server couldn not start. Check /var/log/syslog for errors.${$NC}"
    exit 1
   fi
-  BLS_SECRET_KEY=$(kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
   BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
   if [ "$?" -gt "0" ];
     then
@@ -252,7 +251,7 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 maxconnections=256
-bind=$NODEIP
+bind=$NODEIP:$COIN_PORT
 externalip=$NODEIP
 masternodeblsprivkey=${BLS_SECRET_KEY}
 EOF
