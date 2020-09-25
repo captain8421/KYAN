@@ -430,3 +430,26 @@ echo -e "${GREEN}protx register_submit $tx $sig${NC}"
 
 echo -e "${GREEN}The output will look like this: aba8c22f8992d78fd4ff0c94cb19a5c30e62e7587ee43d5285296a4e6e5af062, Your masternode is now registered and will appear on the Deterministic Masternode List after the transaction is mined to a block. You can view this list on the Masternodes Tab${NC}"
 }
+
+function setup_node() {
+  get_ip
+  create_config
+  create_key
+  update_config
+  enable_firewall
+  #install_sentinel
+  important_information
+  configure_systemd
+  register_your_masternode
+}
+
+
+${LICON}${LICON}${LICON}## Main ${LICON}${LICON}${LICON}##
+clear
+
+purgeOldInstallation
+checks
+prepare_system
+download_node
+setup_node
+set_scripts_and_aliases
