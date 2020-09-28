@@ -97,12 +97,12 @@ function download_node() {
   chmod +x $COIN_DAEMON >/dev/null 2>&1
   chmod +x $COIN_CLI >/dev/null 2>&1
   chmod +x $COIN_TX >/dev/null 2>&1
-  cp sudo $COIN_DAEMON $COIN_PATH >/dev/null 2>&1
-  cp sudo $COIN_DAEMON /root/ >/dev/null 2>&1
-  cp sudo $COIN_CLI $COIN_PATH >/dev/null 2>&1
-  cp sudo $COIN_CLI /root/ >/dev/null 2>&1
-  cp sudo $COIN_TX $COIN_PATH >/dev/null 2>&1
-  cp sudo $COIN_TX /root/ >/dev/null 2>&1
+  sudo cp $COIN_DAEMON $COIN_PATH >/dev/null 2>&1
+  sudo cp $COIN_DAEMON /root/ >/dev/null 2>&1
+  sudo cp $COIN_CLI $COIN_PATH >/dev/null 2>&1
+  sudo cp $COIN_CLI /root/ >/dev/null 2>&1
+  sudo cp $COIN_TX $COIN_PATH >/dev/null 2>&1
+  sudo cp $COIN_TX /root/ >/dev/null 2>&1
   cd ~ >/dev/null 2>&1
   rm -rf $TMP_FOLDER >/dev/null 2>&1
   clear
