@@ -247,7 +247,7 @@ function update_config() {
 maxconnections=256
 bind=$NODEIP:$COIN_PORT
 externalip=$NODEIP
-masternodeblsprivkey={BLS_SECRET_KEY}
+masternodeblsprivkey=${BLS_SECRET_KEY}
 EOF
 }
 
