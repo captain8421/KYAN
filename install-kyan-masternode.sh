@@ -202,7 +202,7 @@ function create_key() {
 	echo -ne '\n'
     echo -e "${GREEN}* Done${NONE}";
       sleep 30
-  kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
+  $COIN_CLI bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
   
   read -e $BLS_SECRET_KEY
   $COIN_PATH$COIN_CLI stop
