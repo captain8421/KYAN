@@ -339,4 +339,3 @@ checks
 prepare_system
 download_node
 setup_node
-set_scripts_and_aliases
