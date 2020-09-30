@@ -2,7 +2,7 @@
 
 TMP_FOLDER=$(mktemp -d)
 CONFIG_FILE='kyan.conf'
-CONFIGFOLDER='/root/.kyancoin'
+CONFIGFOLDER='/root/.kyancore'
 COIN_DAEMON='kyand'
 COIN_CLI='kyan-cli'
 COIN_TX='kyan-tx'
