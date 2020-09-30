@@ -204,7 +204,6 @@ function create_key() {
       sleep 30
   BLS_SECRET_KEY=$(kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
   BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
-  fi
   $COIN_PATH$COIN_CLI stop
 clear
 }
