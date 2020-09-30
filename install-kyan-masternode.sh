@@ -6,6 +6,8 @@ CONFIGFOLDER='/root/.kyancore'
 COIN_DAEMON='kyand'
 COIN_CLI='kyan-cli'
 COIN_TX='kyan-tx'
+BLS_SECRET_KEY=$(kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
+BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
 COIN_PATH='/usr/local/bin/'
 OS_VERSION=$(lsb_release -d)
 COIN_TGZP='https://github.com/kyancoin/KYAN/releases/download/v0.15.0.0.k/KYAN-0.15-Linux.zip'
@@ -202,8 +204,8 @@ function create_key() {
 	echo -ne '\n'
     echo -e "${GREEN}* Done${NONE}";
       sleep 30
-  BLS_SECRET_KEY=$(kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
-  BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
+  kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }'
+  read -e $BLS_SECRET_KEY
   $COIN_PATH$COIN_CLI stop
 clear
 }
