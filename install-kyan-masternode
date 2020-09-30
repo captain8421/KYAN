@@ -12,8 +12,8 @@ COIN_TGZP='https://github.com/kyancoin/KYAN/releases/download/v0.15.0.0.k/KYAN-0
 COIN_BOOTSTRAP='https://github.com/kyancoin/KYAN/releases/download/v0.15.0.0.k/bootstrap.zip'
 COIN_BOOTSTRAP_NAME=$(echo $COIN_BOOTSTRAP | awk -F'/' '{print $NF}')
 COIN_TGZ=$(echo $COIN_TGZP | awk -F'/' '{print $NF}')
-COIN_NAME='sap'
-COIN_NAME_OLD='sapd'
+COIN_NAME='kyan'
+COIN_NAME_OLD='kyand'
 PROJECT_NAME='Kyanite Coin (KYAN)'
 COIN_EXPLORER='https://explorer.kyancoin.net'
 COIN_PORT=7577
@@ -179,9 +179,64 @@ EOF
 }
 
 function create_key() {
-
+  $COIN_PATH$COIN_DAEMON -daemon
+	echo -ne "${RED}${LICON}${LICON}${LICON} ${GREEN}(10%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(20%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(30%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(40%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(50%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(60%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(70%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(80%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(90%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(100%)${NC}\r"
+	sleep 3
+	echo -ne '\n'
+    echo -e "${GREEN}* Done${NONE}";
+      sleep 30
+  if [ -z "$(ps axo cmd:100 | grep $COIN_DAEMON)" ]; then
+   echo -e "${RED}$COIN_NAME server couldn not start. Check /var/log/syslog for errors.${$NC}"
+   exit 1
+  fi
+  BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
+  if [ "$?" -gt "0" ];
+    then
+    echo -e "${RED}Wallet not fully loaded. Let us wait and try again to generate the ${GREEN}Masternode Private Key${NC}"
+	echo -ne "${RED}${LICON}${LICON}${LICON} ${GREEN}(10%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(20%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(30%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(40%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(50%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(60%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(70%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(80%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(90%)${NC}\r"
+	sleep 3
+	echo -ne "${RED}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON}${LICON} ${GREEN}(100%)${NC}\r"
+	sleep 3
+	echo -ne '\n'
+    echo -e "${GREEN}* Done${NONE}";
+    sleep 30
   BLS_SECRET_KEY=$(kyan-cli bls generate | grep secret | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
   BLS_PUBLIC_KEY=$(kyan-cli bls generate | grep public | awk -F: '{ print $2 }' | awk -F\" '{ print $2 }')
+  fi
   $COIN_PATH$COIN_CLI stop
 clear
 }
@@ -192,7 +247,7 @@ function update_config() {
 maxconnections=256
 bind=$NODEIP:$COIN_PORT
 externalip=$NODEIP
-masternodeblsprivkey=${BLS_SECRET_KEY}
+masternodeblsprivkey=BLS_SECRET_KEY
 EOF
 }
 
